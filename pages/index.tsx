@@ -12,7 +12,7 @@ export default function Home() {
   const [ height, SetHeight ] = useState(null);
   const [ length, SetLength ] = useState(null);
   const [ shooterWheel, SetShooterWheel ] = useState(null);
-  const [ RPM, SetRPM ] = useState(0);
+  const [ RPM, SetRPM ] = useState(null);
   const toast = useToast();
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -48,7 +48,7 @@ export default function Home() {
               mode = true;
           } else if (darkMode === "false") {
               document.body.classList.replace(themeClasses.dark, themeClasses.light);
-          } else if (darkMode == null) {
+          } else if (darkMode === null) {
             localStorage.setItem("darkMode", "false");
           }
       }
@@ -99,6 +99,9 @@ export default function Home() {
 
     // const rpm = String(CalulateRPM(height, length, shooterWheel));
     // const parsedLength = rpm.length - (rpm.split(".")[0].length + 3)
+    const rpm = String(CalulateRPM(height, length, shooterWheel)); // rpm.split(".")[0].length
+    // rpm.replace(".", "")
+    const outRpm = rpm //`${rpm.split(".")[0]}${rpm.substr(rpm.split(".")[0].length, rpm.split(".")[0].length + 3)}` // rpm.indexOf(".")
 
     // console.log(parsedLength)
 
@@ -134,17 +137,17 @@ export default function Home() {
 
               <div style={{ display: "flex", flexDirection: "row" }}>
                 <Input OnChange={ e => SetHeight(e.currentTarget.value) } placeholder="Distance Height" marginTop="5px" marginBottom="5px" />
-                <p style={{ marginTop: "10px", marginLeft: "10px" }}>mm</p>
+                <p style={{ marginTop: "10px", marginLeft: "10px" }}>m</p>
               </div>
 
               <div style={{ display: "flex", flexDirection: "row" }}>
                 <Input OnChange={ e => SetLength(e.currentTarget.value) } placeholder="Distance Length" marginTop="5px" marginBottom="5px" />
-                <p style={{ marginTop: "10px", marginLeft: "10px" }}>mm</p>
+                <p style={{ marginTop: "10px", marginLeft: "10px" }}>m</p>
               </div>
 
               <div style={{ display: "flex", flexDirection: "row" }}>
                 <Input OnChange={ e => SetShooterWheel(e.currentTarget.value) } placeholder="Shooter Wheel Diameter" marginTop="5px" marginBottom="5px" />
-                <p style={{ marginTop: "10px", marginLeft: "10px" }}>mm</p>
+                <p style={{ marginTop: "10px", marginLeft: "10px" }}>m</p>
               </div>
             </Card>
 
@@ -154,7 +157,7 @@ export default function Home() {
                 <ModalHeader>Calulated RPM</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                  Motor RPM is { RPM }
+                  Final RPM is { RPM }
                 </ModalBody>
 
                 <ModalFooter>
