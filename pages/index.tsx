@@ -174,7 +174,7 @@ export default function Home() {
 
       <footer className={styles.footer}>
         <a
-          href="https://nathanpell.wixsite.com/thepinkteam"
+          href="http://www.thepinkteam.net/"
           target="_blank"
           rel="noopener noreferrer"
         >
